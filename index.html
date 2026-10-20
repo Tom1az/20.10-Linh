@@ -1,78 +1,523 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My First Project - Beginner Fullstack Developer</title>
-  </head>
-  <body>
-    <header>
-      <h1>KeyZone</h1>
-      <nav>
-        <a href="/">Home</a>
-        <a hred="/about">About us</a>
-      </nav>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <style>body{margin:0} img{max-width:100%} [hidden]{display:none!important} :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+    <title>Hoa Cho Bạn Thân</title>
+    <meta name="claude:viewport-fit-sides" content="cover">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap">
+    <style>
+        /* Bố cục: một cột, bó hoa giấy gói tím, ruy băng vàng, thẻ lời chúc kiểu sticker, thư cuối có nút chạy trốn */
+        :root{
+            --bg:#FCE9F3;
+            --paper:#FFFFFF;
+            --ink:#2B1630;
+            --ink-soft:#6C5470;
+            --accent:#DB2777;
+            --accent-tint:#FDD5E8;
+            --line:#F3D3E4;
+            --line-strong:#E2B4CC;
+            --shadow:rgba(120,20,80,.2);
+            --wrap:#8C6CFF;
+            --wrap-dark:#6A4BE0;
+            --leaf:#34A365;
+            --leaf-dark:#23804D;
+            --ribbon:#FFC93C;
+            --filler:#FFFFFF;
+            --edge:rgba(43,22,48,.18);
+            --p1:#FF5FA2;
+            --p2:#FFB3D1;
+            --p3:#FFC93C;
+            --p4:#FFFFFF;
+            --p5:#FF8A3D;
+            --p6:#E8336F;
+            --center:#FFC93C;
+            --rose-core:#B5175B;
+            --f-display:"Baloo 2", "Arial Rounded MT Bold", system-ui, sans-serif;
+            --f-body:var(--f-display);
+            --f-hand:var(--f-display);
+            --f-card:var(--f-display);
+            --display-w:800;
+            --em-style:normal;
+            --card-size:1.38rem;
+            --card-w:600;
+            --radius:22px;
+            --base:16px;
+        }
+        @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--bg:#1A1020;--paper:#26182E;--ink:#F8EAF5;--ink-soft:#C3A9C4;--accent:#FF6FB0;--accent-tint:#4A1F3A;--line:#3B2843;--line-strong:#5A4063;--shadow:rgba(0,0,0,.5);--wrap:#6E4FE6;--wrap-dark:#5237BF;--filler:#F3E6F0;--edge:rgba(0,0,0,.3);color-scheme:dark} }
+        :root[data-theme="dark"]{--bg:#1A1020;--paper:#26182E;--ink:#F8EAF5;--ink-soft:#C3A9C4;--accent:#FF6FB0;--accent-tint:#4A1F3A;--line:#3B2843;--line-strong:#5A4063;--shadow:rgba(0,0,0,.5);--wrap:#6E4FE6;--wrap-dark:#5237BF;--filler:#F3E6F0;--edge:rgba(0,0,0,.3);color-scheme:dark}
+
+        body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:var(--base);line-height:1.6;-webkit-font-smoothing:antialiased}
+        .wrap{max-width:640px;margin-inline:auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:28px 64px;display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+
+        .hero{display:grid;gap:10px}
+        .eyebrow{margin:0;font:600 .74rem/1.2 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+        h1{margin:0;font-family:var(--f-display);font-weight:var(--display-w);font-size:clamp(2.2rem, 1.5rem + 3.4vw, 3.4rem);line-height:1.08;text-wrap:balance}
+        h1 em{font-style:var(--em-style);color:var(--accent)}
+        .lede{margin:0;color:var(--ink-soft);max-width:32em}
+
+        /* ---------- Bó hoa ---------- */
+        .stage{position:relative;display:grid;justify-items:center}
+        .bouquet{width:min(100%, 440px);height:auto;overflow:visible;touch-action:manipulation}
+        .wrap-back{fill:var(--wrap-dark)}
+        .wrap-front{fill:var(--wrap)}
+        .wrap-fold{stroke:var(--wrap-dark);stroke-width:2;opacity:.55;fill:none}
+        .stem{stroke:var(--leaf-dark);stroke-width:3;stroke-linecap:round;fill:none}
+        .leaf{fill:var(--leaf)}
+        .filler{fill:var(--filler)}
+        .ribbon{fill:var(--ribbon)}
+        .ribbon-tail{stroke:var(--ribbon);stroke-width:6;stroke-linecap:round;fill:none}
+
+        .flower{cursor:pointer;outline:none}
+        .flower .hit{fill:transparent}
+        .halo{fill:none;stroke:var(--accent);stroke-width:2;opacity:.0;transform:scale(.8);animation:halo 2.2s ease-out infinite}
+        .flower.open .halo{animation:none;opacity:0}
+        .flower:focus-visible .halo{animation:none;opacity:1;stroke-width:3;transform:scale(1)}
+        @keyframes halo{0%{opacity:.7;transform:scale(.75)}100%{opacity:0;transform:scale(1.25)}}
+        .bud{transition:transform .35s ease, opacity .3s ease;animation:sway 3.2s ease-in-out infinite}
+        .flower:nth-of-type(2n) .bud{animation-delay:-1.4s}
+        @keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+        .flower:hover:not(.open) .bud{transform:scale(1.12)}
+        .flower.open .bud{animation:none;transform:scale(0);opacity:0}
+        .pt{stroke:var(--edge);stroke-width:.8;transform:scale(.1);opacity:0;transition:transform .8s cubic-bezier(.3,1.45,.5,1) calc(var(--d) * 1ms), opacity .25s ease calc(var(--d) * 1ms)}
+        .flower.open .pt{transform:scale(1);opacity:1}
+        .flower.locked-shake .bud{animation:shake .45s ease}
+        @keyframes shake{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
+
+        .hint{margin:0;text-align:center;color:var(--ink-soft);font-size:.95em;max-width:30em;justify-self:center}
+
+        /* ---------- Thẻ lời chúc ---------- */
+        .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px clamp(18px, 5vw, 30px) 24px;display:grid;gap:10px;box-shadow:0 18px 40px -26px var(--shadow);min-height:9.5em;align-content:start}
+        .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+        .tag{display:inline-block;font:600 .78rem/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-tint);padding:7px 11px;border-radius:999px}
+        .progress{display:flex;align-items:center;gap:8px;color:var(--ink-soft);font-size:.82rem;font-variant-numeric:tabular-nums}
+        .dots{display:flex;gap:5px}
+        .dots i{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--line-strong);display:block;transition:background .3s, border-color .3s}
+        .dots i.on{background:var(--accent);border-color:var(--accent)}
+        .card-text{margin:0;font-family:var(--f-card);font-size:var(--card-size);line-height:1.5;font-weight:var(--card-w)}
+        .card-text.swap{animation:swap .5s ease}
+        @keyframes swap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+        /* ---------- Thư cuối ---------- */
+        .finale{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(26px, 6vw, 46px);display:grid;gap:14px;box-shadow:0 26px 60px -30px var(--shadow);scroll-margin-top:24px;animation:swap .8s ease}
+        h2 em{font-style:var(--em-style);color:var(--accent)}
+        h2{margin:0;font-family:var(--f-display);font-weight:var(--display-w);font-size:clamp(1.8rem, 1.3rem + 2vw, 2.5rem);line-height:1.12;text-wrap:balance}
+        .finale .body p{margin:0 0 .8em;font-family:var(--f-hand);font-weight:500;font-size:clamp(1.35rem, 1.15rem + .9vw, 1.65rem);line-height:1.55}
+        .finale .sign{margin:0;text-align:right;font:700 clamp(1.4rem, 1.2rem + .9vw, 1.7rem)/1.3 var(--f-hand);color:var(--accent)}
+
+        .gag{display:grid;gap:12px;justify-items:center;text-align:center;border-top:1px dashed var(--line-strong);padding-top:20px;margin-top:6px}
+        .gag p{margin:0;font-weight:600}
+        .gag-field{position:relative;width:100%;height:190px}
+        .gag-field .btn{position:absolute;top:50%;transform:translate(-50%,-50%)}
+        #yesBtn{left:50%;top:26%}
+        #noBtn{left:50%;top:70%;transition:left .25s ease, top .25s ease}
+        .gag-result{font:700 clamp(1.4rem, 1.2rem + 1vw, 1.75rem)/1.4 var(--f-hand);color:var(--accent)}
+
+        .btn{font:600 1rem/1 var(--f-body);padding:14px 24px;border-radius:999px;border:0;cursor:pointer;background:var(--ink);color:var(--paper);white-space:nowrap;transition:background .2s}
+        .btn:hover{background:var(--accent)}
+        .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line-strong)}
+        .btn.ghost:hover{background:var(--accent-tint)}
+        .btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+        .replay{justify-self:center}
+
+        footer{text-align:center;color:var(--ink-soft);font-size:.85rem}
+
+        #fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:30}
+
+        @media (prefers-reduced-motion: reduce){
+            *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0ms!important}
+        }
+    </style>
+</head>
+<body>
+<main class="wrap v-friend">
+    <header class="hero">
+        <p class="eyebrow" id="eyebrow"></p>
+        <h1 id="title"></h1>
+        <p class="lede" id="lede"></p>
     </header>
 
-    <main>
-      <article>
-        <h2>A Post Title</h2>
-        <p>The content of the post...</p>
-      </article>
-    </main>
+    <div class="stage">
+        <svg class="bouquet" id="bouquet" viewBox="0 52 400 388" role="group" aria-label="Bó hoa">
+            <polygon class="wrap-back" points="54,178 346,178 206,430 194,430"/>
+            <g id="stems"></g>
+            <g id="greens">
+                <ellipse class="leaf" cx="96" cy="214" rx="10" ry="28" transform="rotate(-52 96 214)"/>
+                <ellipse class="leaf" cx="304" cy="214" rx="10" ry="28" transform="rotate(52 304 214)"/>
+                <ellipse class="leaf" cx="128" cy="250" rx="9" ry="24" transform="rotate(-28 128 250)"/>
+                <ellipse class="leaf" cx="272" cy="250" rx="9" ry="24" transform="rotate(28 272 250)"/>
+                <ellipse class="leaf" cx="200" cy="88" rx="8" ry="22" transform="rotate(8 200 88)"/>
+                <g class="filler">
+                    <circle cx="82" cy="150" r="3.4"/><circle cx="90" cy="141" r="3"/><circle cx="74" cy="139" r="2.8"/><circle cx="86" cy="130" r="2.4"/>
+                    <circle cx="318" cy="150" r="3.4"/><circle cx="310" cy="141" r="3"/><circle cx="326" cy="139" r="2.8"/><circle cx="314" cy="130" r="2.4"/>
+                    <circle cx="128" cy="80" r="3"/><circle cx="120" cy="72" r="2.6"/><circle cx="134" cy="70" r="2.4"/>
+                    <circle cx="272" cy="80" r="3"/><circle cx="280" cy="72" r="2.6"/><circle cx="266" cy="70" r="2.4"/>
+                </g>
+            </g>
+            <g id="flowers"></g>
+            <polygon class="wrap-front" points="92,252 308,252 212,432 188,432"/>
+            <path class="wrap-fold" d="M150 252L196 430M250 252L204 430"/>
+            <g>
+                <path class="ribbon-tail" d="M196 340L178 378M204 340L224 376"/>
+                <ellipse class="ribbon" cx="181" cy="332" rx="20" ry="10" transform="rotate(-18 181 332)"/>
+                <ellipse class="ribbon" cx="219" cy="332" rx="20" ry="10" transform="rotate(18 219 332)"/>
+                <circle class="ribbon" cx="200" cy="335" r="8"/>
+            </g>
+        </svg>
+    </div>
 
-    <aside>
-      <h2>Related</h2>
-      <a href="/other">Another post</a>
-    </aside>
+    <p class="hint" id="hint"></p>
 
-    <footer>
-      <p>&copy; 2026 KeyZone</p>
-    </footer>
+    <section class="card" aria-live="polite">
+        <div class="card-top">
+            <span class="tag" id="tag">Lời chúc</span>
+            <span class="progress"><span class="dots" id="dots"></span><span id="count"></span></span>
+        </div>
+        <p class="card-text" id="cardText"></p>
+    </section>
 
-    <p>A paragraph is the default container for a block of text.</p>
+    <section class="finale" id="finale" hidden aria-labelledby="finaleTitle">
+        <p class="eyebrow" id="finaleEyebrow"></p>
+        <h2 id="finaleTitle"></h2>
+        <div class="body" id="finaleBody"></div>
+        <p class="sign" id="sign"></p>
+        <div class="gag" id="gag" hidden>
+            <p id="gagQ"></p>
+            <div class="gag-field" id="gagField">
+                <button class="btn" id="yesBtn" type="button"></button>
+                <button class="btn ghost" id="noBtn" type="button"></button>
+            </div>
+            <p class="gag-result" id="gagResult" hidden></p>
+        </div>
+    </section>
 
-    <!-- Unordered list: order doesn't matter -->
-    <ul>
-      <li>Coffee</li>
-      <li>Tea</li>
-    </ul>
+    <button class="btn ghost replay" id="replay" type="button" hidden>Cho hoa nở lại từ đầu</button>
+    <footer id="footer"></footer>
+</main>
 
-    <!-- Ordered list: sequence matters -->
-    <ol>
-      <li>Boil the water</li>
-      <li>Add the grounds</li>
-    </ol>
+<canvas id="fx" aria-hidden="true"></canvas>
 
-    <!-- Description list: term/definition pairs -->
-    <dl>
-      <dt>HTML</dt>
-      <dd>HyperText Markup Language</dd>
-    </dl>
+<script>
+    const CONFIG = {
+        "recipients": {
+            "default": {
+                "x": "bà"
+            }
+        },
+        "eyebrow": "20/10 · Ngày Phụ nữ Việt Nam",
+        "title": "Tặng hoa cho <em>ní</em>",
+        "lede": "Bảy bông hoa cho 7 năm làm phiền nhau nhíe",
+        "hint": "Màu nào ghét nhất bấm trước",
+        "empty": "Bấm đại cái i má",
+        "lockedTag": "Từ từ",
+        "locked": "Này từ từ bấm nhe",
+        "footer": "from pnghia",
+        "finaleFx": "confetti",
+        "flowers": [
+            {
+                "tag": "💅",
+                "type": "rose",
+                "color": "--p1",
+                "text": "Chúc Khánh Linh càng lớn càng đẹp (lão), ngày càng tự tin với bản thân mình nhiều hơn ╰(*°▽°*)╯"
+            },
+            {
+                "tag": "💵💲",
+                "type": "five",
+                "color": "--p3",
+                "text": "Chúc cho ví Khánh Linh càng ngày càng nặng, sớm sớm có Porsche để tui mượn đi phông bạt ạ (/≧▽≦)/"
+            },
+            {
+                "tag": "🧘‍♀️",
+                "type": "daisy",
+                "color": "--p4",
+                "text": "Chúc bà luôn bình yên và có nhiều năng lượng tích cực trong đơì sống, khi nào mệt mỏi hay tiêu cực thì hú tui đi chơi o(*￣▽￣*)o"
+            },
+            {
+                "tag": "❤️",
+                "type": "rose",
+                "color": "--p2",
+                "text": "Chúc Khánh Linh sẽ tìm được tình iu của đời mình trong first try, tìm được người thực sự trân trọng con người của Khánh Linh và làm cho Khánh Linh iu đời (nếu k muốn thì th từ từ cũng đc để t rủ m đi chơi cho dễ) (👉ﾟヮﾟ)👉"
+            },
+            {
+                "tag": "😎",
+                "type": "five",
+                "color": "--p5",
+                "text": "Chúc Khánh Linh có con đường công danh sự nghiệp xán lạn, được sống và làm việc mình thích mỗi ngày <333"
+            },
+            {
+                "tag": "🏋️‍♀️",
+                "type": "daisy",
+                "color": "--p1",
+                "text": "Chúc Khánh Linh có nhiều sức khỏe hơn để cân deadline mạnh hơn, nói chung là không có việc gì khó, chỉ sợ không có Khánh Linh"
+            },
+            {
+                "tag": "Dalk teep",
+                "type": "rose",
+                "color": "--p6",
+                "text": "Bông này deep."
+            }
+        ],
+        "finale": {
+            "eyebrow": "Bông cuối cùng",
+            "title": "Real shit",
+            "paras": [
+                "Chắc cái này tui nói nhiều rồi nhưng tui luôn nghĩ là tui tu 10 kiếp mới được gặp và chơi với bạn.",
+                "Cảm ơn Khánh Linh vì đã luôn hiện diện, đã tha thứ (chắc z) cho cái chuỗi 100 tui làm mất.",
+                "Chúc Khánh Linh 20/10 thật vui lúc nào cũng là phiên bản xịn nhất của Khánh Linh!",
+            ],
+            "sign": "Nghỗn"
+        },
+        "gag": {
+            "question": "M thấy idea này ý nghĩa k",
+            "yes": "Sến lo^`n",
+            "no": "Quá đã",
+            "no2": "Khóc rùi nè",
+            "noClicked": "Cảm động quá",
+            "result": "kkk nào rảnh đi nhậu"
+        }
+    };
+</script>
+<script>
+    (function(){
+        const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const $ = id => document.getElementById(id);
+        const NS = 'http://www.w3.org/2000/svg';
 
-    <figure>
-      <blockquote cite="https://www.w3.org/People/Berners-Lee/">
-        <p>This is for everyone.</p>
-      </blockquote>
-      <figcaption>— Tim Berners-Lee, <cite>London 2012 Olympics opening ceremony</cite></figcaption>
-    </figure>
+        /* ---------- Người nhận (đổi theo #me, #ba ở cuối link) ---------- */
+        const key = (location.hash || '').replace('#', '');
+        const who = CONFIG.recipients[key] || CONFIG.recipients.default;
+        const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+        const titleCase = s => s.split(' ').map(w => w === 'và' ? w : cap(w)).join(' ');
+        const fill = s => s.replace(/\{x\}/g, who.x).replace(/\{X\}/g, cap(who.x)).replace(/\{T\}/g, titleCase(who.x));
 
-    <p>This word is <em>emphasized</em> (usually italic).</p>
-    <p>This word is <strong>important</strong> (usually bold).</p>
+        $('eyebrow').textContent = fill(CONFIG.eyebrow);
+        $('title').innerHTML = fill(CONFIG.title);
+        $('lede').textContent = fill(CONFIG.lede);
+        $('hint').textContent = fill(CONFIG.hint);
+        $('cardText').textContent = fill(CONFIG.empty);
+        $('footer').textContent = fill(CONFIG.footer);
+        if (CONFIG.docTitle) document.title = fill(CONFIG.docTitle);
 
-    <!-- Abbreviation with an expansion on hover -->
-    <abbr title="HyperText Markup Language">HTML</abbr>
+        /* ---------- Vẽ bó hoa ---------- */
+        const POS = [[116,172],[162,112],[238,112],[284,172],[150,214],[250,214],[200,160]];
+        const ORDER = [1,2,0,3,6,4,5];
+        const CENTER = 6;
+        const flowers = CONFIG.flowers;
+        const el = (tag, attrs) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); return n; };
 
-    <!-- Machine-readable date/time -->
-    <time datetime="2026-01-15">January 15, 2026</time>
+        POS.forEach(([x, y]) => {
+            $('stems').append(el('path', { class: 'stem', d: `M${x} ${y + 8} Q${(x + 200) / 2} ${(y + 300) / 2 + 10} 200 ${336}` }));
+        });
 
-    <!-- Highlighted / marked text -->
-    Results for <mark>semantic HTML</mark>
+        function petals(type, color){
+            const g = el('g', { class: 'bloom' });
+            const add = (n, shape, delayBase, extra) => {
+                for (let k = 0; k < n; k++) {
+                    const r = el('g', { transform: `rotate(${(360 / n) * k + (extra || 0)})` });
+                    const p = shape();
+                    p.setAttribute('class', 'pt');
+                    p.style.setProperty('--d', delayBase + k * 45);
+                    r.append(p); g.append(r);
+                }
+            };
+            if (type === 'daisy') {
+                add(12, () => el('ellipse', { cx: 0, cy: -17, rx: 5, ry: 13, fill: `var(${color})` }), 80);
+            } else if (type === 'five') {
+                add(5, () => el('circle', { cx: 0, cy: -13, r: 12.5, fill: `var(${color})` }), 80);
+            } else {
+                add(7, () => el('ellipse', { cx: 0, cy: -13, rx: 11.5, ry: 14.5, fill: `var(${color})` }), 80);
+                add(5, () => el('ellipse', { cx: 0, cy: -7, rx: 7.5, ry: 9.5, fill: `var(${color})`, 'fill-opacity': 1 }), 380, 36);
+                add(1, () => el('circle', { cx: 0, cy: 0, r: 7.5, fill: 'var(--rose-core)' }), 600);
+            }
+            if (type !== 'rose') add(1, () => el('circle', { cx: 0, cy: 0, r: 6, fill: 'var(--center)' }), 520);
+            return g;
+        }
 
-    <!-- Inline code -->
-    Call the <code>console.log()</code> function.
+        const nodes = [];
+        ORDER.forEach(i => {
+            const f = flowers[i], [x, y] = POS[i], s = i === CENTER ? 1.32 : 1;
+            const g = el('g', { class: 'flower', transform: `translate(${x} ${y}) scale(${s})`, tabindex: 0, role: 'button', 'aria-label': `Nụ hoa: ${fill(f.tag)}` });
+            g.append(el('circle', { class: 'hit', r: 34 }));
+            g.append(el('circle', { class: 'halo', r: 24 }));
+            const bud = el('g', { class: 'bud' });
+            bud.append(el('path', { d: 'M0 -20C11 -9 11 6 0 11C-11 6 -11 -9 0 -20Z', fill: `var(${f.color})`, stroke: 'var(--edge)', 'stroke-width': .8 }));
+            bud.append(el('path', { d: 'M-10 3Q-5 15 0 12Q5 15 10 3Q5 9 0 7Q-5 9 -10 3Z', fill: 'var(--leaf)' }));
+            g.append(petals(f.type, f.color));
+            g.append(bud);
+            g.addEventListener('click', () => openFlower(i));
+            g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openFlower(i); } });
+            $('flowers').append(g);
+            nodes[i] = g;
+        });
 
-    <!-- Chemistry and math -->
-    H<sub>2</sub>O and E = mc<sup>2</sup>
-  </body>
+        /* ---------- Mở hoa ---------- */
+        const opened = new Set();
+        const dots = $('dots');
+        flowers.forEach(() => dots.append(document.createElement('i')));
+        function renderProgress(){
+            [...dots.children].forEach((d, k) => d.classList.toggle('on', k < opened.size));
+            $('count').textContent = `${opened.size}/${flowers.length} bông đã nở`;
+        }
+        renderProgress();
+
+        function showCard(tag, text){
+            $('tag').textContent = tag;
+            const t = $('cardText');
+            t.textContent = text;
+            t.classList.remove('swap'); void t.offsetWidth; t.classList.add('swap');
+        }
+
+        function openFlower(i){
+            const g = nodes[i], f = flowers[i];
+            if (i === CENTER && !opened.has(CENTER) && opened.size < flowers.length - 1) {
+                g.classList.remove('locked-shake'); void g.getBoundingClientRect(); g.classList.add('locked-shake');
+                showCard(fill(CONFIG.lockedTag), fill(CONFIG.locked));
+                return;
+            }
+            const fresh = !opened.has(i);
+            g.classList.add('open');
+            g.setAttribute('aria-label', `Hoa đã nở: ${fill(f.tag)}`);
+            opened.add(i);
+            renderProgress();
+            showCard(fill(f.tag), fill(f.text));
+            if (fresh) sparkle(g);
+            if (fresh && i === CENTER) setTimeout(finale, reduce ? 0 : 1100);
+        }
+
+        /* ---------- Thư cuối ---------- */
+        function finale(){
+            const fin = $('finale');
+            $('finaleEyebrow').textContent = fill(CONFIG.finale.eyebrow);
+            $('finaleTitle').innerHTML = fill(CONFIG.finale.title);
+            const body = $('finaleBody'); body.textContent = '';
+            CONFIG.finale.paras.forEach(p => { const n = document.createElement('p'); n.textContent = fill(p); body.append(n); });
+            $('sign').textContent = fill(who.sign || CONFIG.finale.sign);
+            if (CONFIG.gag) {
+                $('gag').hidden = false;
+                $('gagQ').textContent = CONFIG.gag.question;
+                $('yesBtn').textContent = CONFIG.gag.yes;
+                $('noBtn').textContent = CONFIG.gag.no;
+                $('gagResult').hidden = true;
+                $('yesBtn').hidden = false; $('noBtn').hidden = false;
+                $('noBtn').style.left = ''; $('noBtn').style.top = '';
+            }
+            fin.hidden = false;
+            $('replay').hidden = false;
+            fin.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+            if (CONFIG.finaleFx === 'confetti') confetti(); else petalsFall();
+        }
+
+        $('replay').addEventListener('click', () => {
+            opened.clear();
+            nodes.forEach((g, i) => { g.classList.remove('open'); g.setAttribute('aria-label', `Nụ hoa: ${fill(flowers[i].tag)}`); });
+            renderProgress();
+            $('tag').textContent = 'Lời chúc';
+            $('cardText').textContent = fill(CONFIG.empty);
+            $('finale').hidden = true; $('replay').hidden = true;
+            $('bouquet').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+        });
+
+        /* ---------- Trò nút chạy trốn (bản bạn thân) ---------- */
+        if (CONFIG.gag) {
+            const no = $('noBtn'), field = $('gagField');
+            let dodges = 0;
+            const flee = e => {
+                if (e && e.cancelable && e.type === 'pointerdown') e.preventDefault();
+                dodges++;
+                const fw = field.clientWidth, fh = field.clientHeight;
+                const bw = no.offsetWidth, bh = no.offsetHeight;
+                let nx, ny, tries = 0;
+                const curX = no.offsetLeft, curY = no.offsetTop;
+                do {
+                    nx = bw / 2 + Math.random() * Math.max(1, fw - bw);
+                    ny = bh / 2 + Math.random() * Math.max(1, fh - bh);
+                    tries++;
+                } while (Math.hypot(nx - curX, ny - curY) < 90 && tries < 20);
+                no.style.left = nx + 'px'; no.style.top = ny + 'px';
+                if (dodges === 4) no.textContent = CONFIG.gag.no2;
+            };
+            no.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') flee(e); });
+            no.addEventListener('pointerdown', flee);
+            no.addEventListener('click', () => { no.textContent = CONFIG.gag.noClicked; flee(); });
+            $('yesBtn').addEventListener('click', () => {
+                $('yesBtn').hidden = true; no.hidden = true;
+                const r = $('gagResult'); r.textContent = CONFIG.gag.result; r.hidden = false;
+                confetti();
+            });
+        }
+
+        /* ---------- Hiệu ứng ---------- */
+        const cv = $('fx'), cx = cv.getContext('2d');
+        let fxRun = 0;
+        function sizeCanvas(){
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            cv.width = innerWidth * dpr; cv.height = innerHeight * dpr;
+            cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        const tokenColors = names => { const css = getComputedStyle(document.documentElement); return names.map(n => css.getPropertyValue(n).trim()); };
+
+        function animate(parts, life, step){
+            if (reduce) return;
+            sizeCanvas();
+            const id = ++fxRun, t0 = performance.now();
+            (function frame(now){
+                if (id !== fxRun) return;
+                const t = now - t0;
+                cx.clearRect(0, 0, innerWidth, innerHeight);
+                cx.globalAlpha = Math.max(0, Math.min(1, (life - t) / 900));
+                parts.forEach(p => step(p, t));
+                if (t < life) requestAnimationFrame(frame); else cx.clearRect(0, 0, innerWidth, innerHeight);
+            })(t0);
+        }
+
+        function sparkle(g){
+            if (reduce) return;
+            const r = g.getBoundingClientRect();
+            const ox = r.left + r.width / 2, oy = r.top + r.height / 2;
+            const cols = tokenColors(['--accent', '--center', '--p2']);
+            const parts = Array.from({ length: 22 }, () => {
+                const a = Math.random() * Math.PI * 2, s = 1.5 + Math.random() * 3;
+                return { x: ox, y: oy, vx: Math.cos(a) * s, vy: Math.sin(a) * s, r: 1.5 + Math.random() * 2.5, c: cols[(Math.random() * cols.length) | 0] };
+            });
+            animate(parts, 900, p => {
+                p.x += p.vx; p.y += p.vy; p.vx *= .95; p.vy *= .95;
+                cx.fillStyle = p.c; cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 7); cx.fill();
+            });
+        }
+
+        function confetti(){
+            const cols = tokenColors(['--accent', '--p3', '--p5', '--leaf', '--p2']);
+            const parts = Array.from({ length: 170 }, () => {
+                const a = -Math.PI / 2 + (Math.random() - .5) * 2.4, s = 7 + Math.random() * 9;
+                return { x: innerWidth / 2, y: innerHeight * .75, vx: Math.cos(a) * s, vy: Math.sin(a) * s, w: 5 + Math.random() * 6, h: 8 + Math.random() * 8,
+                    rot: Math.random() * 6, vr: (Math.random() - .5) * .35, c: cols[(Math.random() * cols.length) | 0] };
+            });
+            animate(parts, 3600, p => {
+                p.vy += .24; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+                cx.save(); cx.translate(p.x, p.y); cx.rotate(p.rot); cx.fillStyle = p.c;
+                cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.rot * 2)) + 1); cx.restore();
+            });
+        }
+
+        function petalsFall(){
+            const cols = tokenColors(['--p1', '--p2', '--accent']);
+            const parts = Array.from({ length: 34 }, (_, k) => ({
+                x: Math.random() * innerWidth, y: -20 - Math.random() * innerHeight * .9, vy: .8 + Math.random() * 1.1,
+                sway: Math.random() * 6, amp: 18 + Math.random() * 30, r: 6 + Math.random() * 6, rot: Math.random() * 6, vr: (Math.random() - .5) * .04,
+                c: cols[k % cols.length]
+            }));
+            animate(parts, 9000, (p, t) => {
+                p.y += p.vy; p.rot += p.vr;
+                const x = p.x + Math.sin(t / 900 + p.sway) * p.amp;
+                cx.save(); cx.translate(x, p.y); cx.rotate(p.rot); cx.fillStyle = p.c; cx.globalAlpha *= .85;
+                cx.beginPath(); cx.ellipse(0, 0, p.r * .6, p.r, 0, 0, 7); cx.fill(); cx.restore();
+            });
+        }
+        window.addEventListener('resize', () => { if (!reduce) sizeCanvas(); });
+    })();
+</script>
+</body>
 </html>
